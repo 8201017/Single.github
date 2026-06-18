@@ -271,7 +271,7 @@
         <!-- 姓名 + 标语 -->
         <div class="name-block">
             <div class="name">✨ I am 张家乐</div>
-            <div class="subtitle">计算机科学与技术 · 大三</div>
+            <div class="subtitle">计算机应用技术 · 大一</div>
         </div>
 
         <div class="divider"></div>
