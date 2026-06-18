@@ -1,0 +1,1 @@
+document.querySelector('.enter-btn').addEventListener('click', function(e){<br/>    e.preventDefault();<br/>    document.querySelector('#about').scrollIntoView({<br/>        behavior: 'smooth'<br/>    })<br/>})
