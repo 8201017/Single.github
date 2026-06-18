@@ -1,225 +1,323 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>张家乐 · 个人主页</title>
     <style>
+        /* ---------- 全局重置 ---------- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft YaHei", sans-serif;
         }
-        html {
-            scroll-behavior: smooth;
-        }
+
         body {
-            background-color: #f5f7fa;
-            color: #333;
-        }
-        /* 导航栏 */
-        nav {
-            width: 100%;
-            height: 60px;
-            background: #2563eb;
-            position: fixed;
-            top: 0;
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        nav a:hover {
-            color: #bfdbfe;
-        }
-        section {
-            padding: 80px 10%;
+            background-color: #0a0a0a;      /* 全黑背景，稍微带一点深邃 */
+            color: #ffffff;
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 60px 80px 80px 130px;  /* 左留白大，实现“往右”效果 */
             min-height: 100vh;
-        }
-        /* 首页简介 */
-        #home {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            text-align: center;
-            padding-top: 120px;
         }
+
+        /* ---------- 容器 ---------- */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* ---------- 头部 ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 30px;
+        }
+
         .avatar {
-            width: 160px;
-            height: 160px;
+            width: 110px;
+            height: 110px;
+            background: #2a2a2a;
             border-radius: 50%;
-            background: #cbd5e1;
-            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            color: #64748b;
+            font-size: 56px;
+            border: 2px solid #ffffff30;
+            flex-shrink: 0;
         }
-        h1 {
-            font-size: 36px;
-            margin-bottom: 12px;
-            color: #1e293b;
+
+        .greeting {
+            font-size: 76px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            line-height: 1.2;
         }
-        .desc {
-            font-size: 18px;
-            color: #64748b;
-            max-width: 600px;
+
+        .greeting span {
+            font-weight: 600;
+            background: linear-gradient(135deg, #f0e6a0, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ---------- 姓名 + 标语 ---------- */
+        .name-block {
+            margin-bottom: 18px;
+        }
+
+        .name {
+            font-size: 62px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 200;
+            color: #bbbbbb;
+            letter-spacing: 2px;
+        }
+
+        /* ---------- 分隔装饰 ---------- */
+        .divider {
+            width: 70px;
+            height: 2px;
+            background: #ffffff40;
+            margin: 28px 0 32px 0;
+        }
+
+        /* ---------- 简介 ---------- */
+        .bio {
+            font-size: 22px;
+            font-weight: 300;
             line-height: 1.8;
+            color: #dddddd;
+            max-width: 720px;
+            margin-bottom: 36px;
         }
-        /* 技能板块 */
-        #skill h2, #project h2, #contact h2 {
-            text-align: center;
-            font-size: 28px;
+
+        /* ---------- 技能标签 ---------- */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 20px;
             margin-bottom: 40px;
-            color: #1e293b;
         }
-        .skill-box {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+
+        .skill-tag {
+            background: #1e1e1e;
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 300;
+            border: 1px solid #444444;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: #2c2c2c;
+            border-color: #aaaaaa;
+        }
+
+        /* ---------- 项目展示 ---------- */
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
             gap: 24px;
+            margin-bottom: 44px;
         }
-        .skill-item {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        .skill-item h3 {
-            margin: 12px 0 8px;
-            color: #2563eb;
-        }
-        /* 项目板块 */
-        .project-box {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-            gap: 28px;
-        }
+
         .project-card {
-            background: #fff;
+            background: #141414;
+            border: 1px solid #2a2a2a;
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 20px 28px;
+            min-width: 200px;
+            flex: 1 0 200px;
+            transition: 0.25s;
         }
-        .project-card .img {
-            height: 160px;
-            background: #e2e8f0;
+
+        .project-card:hover {
+            background: #1e1e1e;
+            border-color: #666;
+            transform: translateY(-4px);
         }
-        .project-card .text {
-            padding: 20px;
-        }
+
         .project-card h3 {
-            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
         }
-        /* 联系方式 */
-        #contact {
-            text-align: center;
+
+        .project-card p {
+            font-size: 16px;
+            color: #aaaaaa;
+            font-weight: 300;
         }
-        .contact-info {
-            background: #fff;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+
+        /* ---------- 联系方式 ---------- */
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px 40px;
+            margin-bottom: 28px;
         }
-        .contact-info p {
-            margin: 14px 0;
-            font-size: 17px;
+
+        .contact a {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 300;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: 0.2s;
+            letter-spacing: 1px;
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #1e293b;
-            color: #fff;
-            font-size: 14px;
+
+        .contact a:hover {
+            border-bottom-color: #ffffff;
+            opacity: 0.8;
+        }
+
+        /* ---------- 进入按钮（保留） ---------- */
+        .btn-enter {
+            display: inline-block;
+            color: #ffffff;
+            background: transparent;
+            border: 2px solid #ffffff;
+            padding: 16px 52px;
+            font-size: 30px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+            margin-top: 10px;
+        }
+
+        .btn-enter:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: #ccc;
+            transform: scale(1.02);
+        }
+
+        /* ---------- 响应式 ---------- */
+        @media (max-width: 800px) {
+            body {
+                padding: 40px 40px 60px 60px;
+            }
+            .greeting {
+                font-size: 52px;
+            }
+            .name {
+                font-size: 44px;
+            }
+            .bio {
+                font-size: 19px;
+            }
+            .avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 30px 20px 40px 30px;
+            }
+            .header {
+                flex-wrap: wrap;
+                gap: 14px;
+            }
+            .greeting {
+                font-size: 38px;
+            }
+            .name {
+                font-size: 32px;
+            }
+            .subtitle {
+                font-size: 20px;
+            }
+            .btn-enter {
+                font-size: 22px;
+                padding: 12px 32px;
+            }
+            .project-card {
+                flex: 1 0 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav>
-        <a href=" ">首页</a >
-        <a href="#skill">专业技能</a >
-        <a href="#project">项目作品</a >
-        <a href="#contact">联系我</a >
-    </nav>
 
-    <!-- 首页个人简介 -->
-    <section id="home">
-        <div class="avatar">我</div>
-        <h1>张家乐 | 计算机专业学生</h1>
-        <p class="desc">热爱前端网页开发，擅长HTML/CSS/JS静态页面制作，熟悉网页UI设计，正在学习静态网站部署与运维，这是我的个人展示单页网站。</p >
-    </section>
-
-    <!-- 技能板块 -->
-    <section id="skill">
-        <h2>我的专业技能</h2>
-        <div class="skill-box">
-            <div class="skill-item">
-                <h3>HTML</h3>
-                <p>页面结构搭建、语义化标签</p >
-            </div>
-            <div class="skill-item">
-                <h3>CSS</h3>
-                <p>响应式布局、动画、Flex/Grid</p >
-            </div>
-            <div class="skill-item">
-                <h3>JavaScript</h3>
-                <p>基础交互、页面动态效果</p >
-            </div>
-            <div class="skill-item">
-                <h3>网页部署</h3>
-                <p>Gitee/GitHub Pages静态站点上线</p >
+    <div class="container">
+        <!-- 头像 + 问候语 -->
+        <div class="header">
+            <div class="avatar">👨‍💻</div>
+            <div class="greeting">
+                👋 <span>Hello</span>
             </div>
         </div>
-    </section>
 
-    <!-- 项目作品 -->
-    <section id="project">
-        <h2>项目作品</h2>
-        <div class="project-box">
+        <!-- 姓名 + 标语 -->
+        <div class="name-block">
+            <div class="name">✨ I am 张家乐</div>
+            <div class="subtitle">计算机科学与技术 · 大三</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 简介 -->
+        <div class="bio">
+            热爱全栈开发与 AI 应用，享受从零构建产品的过程。<br />
+            善于将复杂问题拆解为优雅的代码，保持好奇，持续学习。
+        </div>
+
+        <!-- 技能标签 -->
+        <div class="skills">
+            <span class="skill-tag">⚡ Python</span>
+            <span class="skill-tag">⚡ JavaScript</span>
+            <span class="skill-tag">⚡ React</span>
+            <span class="skill-tag">⚡ Node.js</span>
+            <span class="skill-tag">⚡ Docker</span>
+            <span class="skill-tag">⚡ AI / LLM</span>
+        </div>
+
+        <!-- 项目展示 -->
+        <div class="projects">
             <div class="project-card">
-                <div class="img"></div>
-                <div class="text">
-                    <h3>个人单页官网</h3>
-                    <p>本次期末作业，响应式个人介绍网站</p >
-                </div>
+                <h3>📁 智能助手</h3>
+                <p>基于大模型的对话式工具</p >
             </div>
             <div class="project-card">
-                <div class="img"></div>
-                <div class="text">
-                    <h3>简易商品展示页</h3>
-                    <p>前端课程实训静态页面项目</p >
-                </div>
+                <h3>📁 个人博客</h3>
+                <p>Vue3 + Vite 动态站点</p >
+            </div>
+            <div class="project-card">
+                <h3>📁 数据看板</h3>
+                <p>ECharts 可视化分析平台</p >
             </div>
         </div>
-    </section>
 
-    <!-- 联系方式 -->
-    <section id="contact">
-        <h2>联系我</h2>
-        <div class="contact-info">
-            <p>学号：2025381045</p >
-            <p>姓名：张家乐</p >
-            <p>邮箱：2622124590@qq.com</p >
-            <p>Gitee：gitee.com/你的用户名</p >
+        <!-- 联系方式 -->
+        <div class="contact">
+            <a href=" ">📧 zhangjiale@example.com</a >
+            <a href="#" target="_blank">🐙 GitHub</a >
+            <a href="#" target="_blank">🔗 个人博客</a >
         </div>
-    </section>
 
-    <footer>
-        © 2026 个人主页 | 期末大作业单页网站
-    </footer>
+        <!-- 进入按钮（保留，可当作 CTA） -->
+        <a href="#" class="btn-enter">🚀 进入</a >
+    </div>
+
 </body>
 </html>
